@@ -12,6 +12,7 @@ Task:
 
 ### Step 1 - Creating tables
 
+Creating table for shoes.
 ```
 CREATE TABLE `shoes_shop`.`shp_shoes` (
      `articul` INT(11) NOT NULL AUTO_INCREMENT,
