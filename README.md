@@ -23,3 +23,23 @@ CREATE TABLE `shoes_shop`.`shp_shoes` (
      PRIMARY KEY (`articul`)
 ) ENGINE = MyISAM CHARSET=utf8 COLLATE utf8_general_ci;
 ```
+
+Creating table for shoes sizes.
+```
+CREATE TABLE `shoes_shop`.`shp_shoes_size` (
+     `s_id` INT(11) NOT NULL AUTO_INCREMENT,
+     `articul` INT(11) NOT NULL DEFAULT '0',
+     `s_size` INT(11) DEFAULT NULL,
+     `delivered_at` INT(11) NOT NULL DEFAULT '0',
+     PRIMARY KEY (`s_id`)
+) ENGINE = MyISAM CHARSET=utf8 COLLATE utf8_general_ci;
+```
+
+Creating table for shoes manufacturers.
+```
+CREATE TABLE `shoes_shop`.`shp_manufacturer` (
+     `m_id` INT(11) NOT NULL AUTO_INCREMENT,
+     `m_name` VARCHAR(255) NOT NULL DEFAULT '',
+     PRIMARY KEY (`m_id`)
+) ENGINE = MyISAM CHARSET=utf8 COLLATE utf8_general_ci;
+```
