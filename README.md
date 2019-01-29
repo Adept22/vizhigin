@@ -10,7 +10,7 @@ Task:
 
 Сведения об ассортименте обуви в магазине. База данных должна содержать следующую информацию: артикул, наименование обуви, количество пар, стоимость одной пары, имеющиеся размеры, название фабрики и срок поставки обуви в магазин.
 
-### Step 1 - Creating tables
+### Step 1 - Creating tables.
 
 Creating table for shoes.
 ```
@@ -44,9 +44,9 @@ CREATE TABLE `shoes_shop`.`shp_manufacturer` (
 ) ENGINE = MyISAM CHARSET=utf8 COLLATE utf8_general_ci;
 ```
 
-### Step 2 - Editing data in tables
+### Step 2 - Editing data in tables.
 
-In first i'm create some data in all tables.
+In first i created some data in all tables.
 ```
 INSERT INTO `shp_manufacturer` (`m_id`, `m_name`) VALUES (1, 'CALVIN KLEIN');
 INSERT INTO `shp_manufacturer` (`m_id`, `m_name`) VALUES (2, 'KISS MOON');
@@ -88,4 +88,24 @@ INSERT INTO `shp_shoes_size` (`articul`, `s_size`, `s_count`, `delivered_at`) VA
 INSERT INTO `shp_shoes_size` (`articul`, `s_size`, `s_count`, `delivered_at`) VALUES (475956, 38, 3, 0);
 INSERT INTO `shp_shoes_size` (`articul`, `s_size`, `s_count`, `delivered_at`) VALUES (475956, 39, 7, 0);
 INSERT INTO `shp_shoes_size` (`articul`, `s_size`, `s_count`, `delivered_at`) VALUES (475956, 40, 14, 0);
+```
+
+In second i edit some data.
+```
+UPDATE `shp_shoes_size` SET `delivered_at` = 43200000 WHERE `articul` = 475321;
+UPDATE `shp_shoes_size` SET `delivered_at` = 64800000 WHERE `articul` = 475956;
+UPDATE `shp_shoes_size` SET `delivered_at` = 18000000 WHERE `articul` = 475154;
+```
+
+### Step 3 - Sorting data in tables.
+
+Create one JOIN request.
+```
+SELECT ss.s_name, ss.price, sss.s_size FROM `shp_shoes` ss LEFT JOIN `shp_shoes_size` sss ON (ss.articul = sss.articul) WHERE sss.s_count > 20 GROUP BY sss.s_id ORDER BY ss.price DESC;
+```
+
+### Step 4 - Creating foreign key.
+
+```
+ALTER TABLE `shp_shoes` ADD INDEX(`m_id`);
 ```
