@@ -111,3 +111,13 @@ ALTER TABLE `shp_shoes` ADD INDEX(`m_id`);
 ```
 
 ## №2 - PHP script for working with database (№12)
+
+Task:
+Используя исходную БД, спроектируйте веб-страницу, включив в нее все поля и оформив некоторые из них следующим образом:
+"Срок поставки обуви необходимо вывести в формате, например: 15 Апрель 1998 г."
+
+### Step 1 - Creating MySQL connect file connect.php.
+
+### Step 2 - Creating index file index.php.
+
+### Step 3 - Release main script for display shoes.
