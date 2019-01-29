@@ -5,5 +5,10 @@
      $user = "root";      // Имя пользователя
      $passwd = "root";    // Пароль
      $dbname = "shoes_shop";      //имя базы
-     $connect = new PDO("mysql:host={$host};dbname={$dbname}", $user, $passwd);
+     try {
+          $connect = new PDO("mysql:host={$host};dbname={$dbname}", $user, $passwd, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+     } catch (PDOException $e) {
+          echo 'Подключение не удалось: ' . $e->getMessage();
+          exit();
+     }
 ?>
