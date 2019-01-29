@@ -1,6 +1,6 @@
 # MIREA University homework for methods and means of implementing information technology
 
-## №1 - Database project
+## №1 - Database project (№12)
 
 Task:
 1. Спроектируйте базу данных, состоящую из нескольких таблиц таким образом, чтобы в многотабличной системе были таблицы со связью 1:1, 1:N
@@ -109,3 +109,5 @@ SELECT ss.s_name, ss.price, sss.s_size FROM `shp_shoes` ss LEFT JOIN `shp_shoes_
 ```
 ALTER TABLE `shp_shoes` ADD INDEX(`m_id`);
 ```
+
+## №2 - PHP script for working with database (№12)
