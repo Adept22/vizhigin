@@ -1,73 +1,92 @@
+<?php
+class Enrollee {
+     private const ENROLLEE_FILE = $_SERVER['DOCUMENT_ROOT'] . '/enrollees.json';
+     public $fio = "";
+     public $birthday = 0;
+     public $school = 0;
+     public $articles = array();
+
+     function __construct($_fio, $_birthday, $_school) {
+          $this->fio = $_fio;
+          $this->birthday = $_birthday;
+          $this->school = $_school;
+     }
+
+     private function getEnrollees() {
+          if(file_exists(ENROLLEE_FILE)) {
+               return json_decode(file_get_contents(ENROLLEE_FILE));
+          } else {
+               throw new Exception("Файл с абитуриентами отсутствует");
+          }
+     }
+
+     public function addArticle($name, $mark) {
+          $this->articles[] = array(
+               'name' => $name,
+               'mark' => $mark,
+          );
+
+          return $this->articles;
+     }
+
+     public function write() {
+          $enrollees = $this->getEnrollees();
+          foreach ($enrollees as $key => $enrollee) {
+               if($this->id == $enrollee['id']) return false;
+          }
+
+          $enrollees[] = array(
+               'fio' => $this->fio,
+               'birthday' => $this->birthday,
+               'school' => $this->school
+          );
+     }
+
+     public function writeEnrolleeMarks() {
+          $enrollees = $this->getEnrollees();
+          foreach ($enrollees as $key => $enrollee) {
+               // code...
+          }
+     }
+}
+
+class Mark {
+     $
+}
+
+if(isset($_GET['name'])) {
+
+}
+?>
+
 <!DOCTYPE html>
 <html>
      <head>
           <title>Document</title>
      </head>
      <body>
-          <?php include "connect.php"; ?>
-          <?php
-               $s_size = false;
-               if(isset($_GET['s_size']) && !empty($_GET['s_size'])) $s_size = $_GET['s_size'];
-          ?>
-          <form action="/index.php" method="get">
-               <legend>Выберите размер</legend>
-               <select class="" name="s_size">
-                    <?php if(!$s_size) { ?>
-                         <option value="" selected>Все</option>
-                    <?php } else { ?>
-                         <option value="">Все</option>
-                    <?php } ?>
-                    <?php
-                         $query = $connect->prepare("SELECT s_size FROM `shp_shoes_size` GROUP BY s_size ORDER BY s_size;");
-                         $query->execute();
-
-                         if($query) {
-                              while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                                   if($row['s_size'] == $s_size) {
-                                        echo "<option value=\"" . $row['s_size'] . "\" selected>" . $row['s_size'] . "</option>";
-                                   } else {
-                                        echo "<option value=\"" . $row['s_size'] . "\">" . $row['s_size'] . "</option>";
-                                   }
-                              }
-                              $query = null;
-                         }
-                    ?>
-               </select>
+          <form action="/files1.php" method="get" style="width: 300px;">
+               <input type="text" name="name" value="" placeholder="ФИО">
+               <input type="text" name="birthday" value="" placeholder="Год рождения">
+               <input type="text" name="school" value="" placeholder="Год окончания школы">
+               <fieldset>
+                    <legend>Нуждается в общежитии?</legend>
+                    <label for="hostel"><input type="radio" name="hostel" value="Да">Да</label>
+                    <label for="hostel"><input type="radio" name="hostel" value="Нет">Нет</label>
+               </fieldset>
                <button type="submit">Отправить</button>
           </form>
-          <p>&nbsp;</p>
-          <?php
-
-               $sql = "SELECT * FROM `shp_shoes` ss LEFT JOIN `shp_shoes_size` sss ON (ss.articul = sss.articul)" . ($s_size !== false ? (" WHERE sss.s_size = " . $s_size) : "") . " ORDER BY sss.s_size;";
-
-               $query = $connect->prepare($sql);
-               $query->execute();
-
-               echo "<table style='border-collase: collapse;' border='1'>";
-               echo "<tr>";
-               echo "<th>№</th>";
-               echo "<th>Артикул</th>";
-               echo "<th>Название</th>";
-               echo "<th>Размер</th>";
-               echo "<th>Количество</th>";
-               echo "<th>Дата поставки</th>";
-               echo "</tr>";
-               if($query) {
-                    $i = 1;
-                    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-                         echo "<tr>";
-                         echo "<td>" . $i . "</td>";
-                         echo "<td>" . $row['articul'] . "</td>";
-                         echo "<td>" . $row['s_name'] . "</td>";
-                         echo "<td>" . $row['s_size'] . "</td>";
-                         echo "<td>" . $row['s_count'] . "</td>";
-                         echo "<td>" . ($row['delivered_at'] != 0 ? date("d F Y", strtotime('now') + $row['delivered_at']) : "") . "</td>";
-                         echo "</tr>";
-                         $i++;
-                    }
-                    $query = null;
-               }
-               echo "</table>";
-          ?>
+     <body>
+          <form action="/files1.php" method="get" style="width: 300px;">
+               <input type="text" name="name" value="" placeholder="ФИО">
+               <input type="text" name="birthday" value="" placeholder="Год рождения">
+               <input type="text" name="school" value="" placeholder="Год окончания школы">
+               <fieldset>
+                    <legend>Нуждается в общежитии?</legend>
+                    <label for="hostel"><input type="radio" name="hostel" value="Да">Да</label>
+                    <label for="hostel"><input type="radio" name="hostel" value="Нет">Нет</label>
+               </fieldset>
+               <button type="submit">Отправить</button>
+          </form>
      </body>
 </html>
